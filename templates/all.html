@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<html>
+<head>
+  <title>TASKS</title>
+  <link href="{% static 'style.css' %}" rel="stylesheet"/>
+</head>
+<body>
+<div id="content">
+{{ msg }}
+<ul>
+<li>
+<form action="{% url 'index' %}" method="POST">{% csrf_token %}
+<span>
+  Task Name: <input type="text" name="task_name"/>
+  Task Branch: <input type="text" name="task_branch"/>
+  Task Pts: <input type="number" name="task_pts"/>
+  <input type="submit" value="Add"/>
+</span>
+</form>
+</li>
+{% for tsk in task_list %}
+  <li>
+    <a href="{% url 'alter' task_id=tsk.id %}">[
+    {% if tsk.completed %}
+      X
+    {% endif %}
+    ]</a>
+    {{ tsk.name }}, on branch {{ tsk.branch }}
+  </li>
+{% endfor %}
+</ul>
+</div>
+</body>
+</html>
