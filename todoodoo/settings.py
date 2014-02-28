@@ -52,6 +52,14 @@ ROOT_URLCONF = 'todoodoo.urls'
 
 WSGI_APPLICATION = 'todoodoo.wsgi.application'
 
+# Email
+# https://docs.djangoproject.com/en/dev/topics/email/
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'app22616172@heroku.com'
+EMAIL_HOST_PASSWORD = '4suhwxvr'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -60,6 +68,7 @@ WSGI_APPLICATION = 'todoodoo.wsgi.application'
 import dj_database_url
 
 DATABASES = {}
+print dj_database_url.config()
 DATABASES['default'] = dj_database_url.config()
 
 # local settings

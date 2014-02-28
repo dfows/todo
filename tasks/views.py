@@ -3,6 +3,9 @@ import sendgrid
 
 from tasks.models import *
 
+s = sendgrid.Sendgrid('app22616172@heroku.com','4suhwxvr',secure=True)
+subj,text_content = ''
+
 # Create your views here.
 def index(request):
   msg = ''
@@ -16,6 +19,11 @@ def index(request):
       msg = 'success!'
       new_task = Task(name=n,branch=b,point_worth=p)
       new_task.save()
+      subj = 'NEW TASK'
+      text_content = "You have been assigned a new task."
+      message = sendgrid.Message(('app22616172@heroku.com','DEMONSLAYER'),subj,text_content)
+      message.add_to('jk3405@nyu.edu','GRATEFUL MINION')
+      s.web.send(message)
   task_list = Task.objects.order_by('id')
   context = {'task_list':task_list, 'msg':msg}
   return render(request, 'all.html', context)
@@ -23,9 +31,7 @@ def index(request):
 def alter(request,task_id):
   finished_task = Task.objects.get(id=task_id)
   pts = finished_task.point_worth
-  s = sendgrid.Sendgrid('app22616172@heroku.com','4suhwxvr',secure=True)
   subj = 'Task #'+task_id+' changed!'
-  text_content = ''
   if finished_task.completed:
     finished_task.completed = False
     text_content = "Your task has been marked undone. You have unearned "+pts+" points."
