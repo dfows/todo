@@ -3,7 +3,10 @@ import sendgrid
 
 from tasks.models import *
 
-s = sendgrid.Sendgrid('app22616172@heroku.com','4suhwxvr',secure=True)
+s = sendgrid.SendGridClient('app22616172@heroku.com','4suhwxvr')
+message = sendgrid.Mail()
+message.set_from('DEMONSLAYER <app22616172@heroku.com>')
+message.add_to('MINION <jk3405@nyu.edu>')
 subj,text_content = ''
 
 # Create your views here.
@@ -21,9 +24,9 @@ def index(request):
       new_task.save()
       subj = 'NEW TASK'
       text_content = "You have been assigned a new task."
-      message = sendgrid.Message(('app22616172@heroku.com','DEMONSLAYER'),subj,text_content)
-      message.add_to('jk3405@nyu.edu','GRATEFUL MINION')
-      s.web.send(message)
+      message.set_subject(subj)
+      message.set_text(text_content)
+      s.send(message)
   task_list = Task.objects.order_by('id')
   context = {'task_list':task_list, 'msg':msg}
   return render(request, 'all.html', context)
@@ -39,8 +42,8 @@ def alter(request,task_id):
     finished_task.completed = True
     text_content = "Congrats! You've completed a task and earned "+pts+" points!"
   finished_task.save()
-  message = sendgrid.Message(('app22616172@heroku.com','DEMONSLAYER'),subj,text_content)
-  message.add_to('jk3405@nyu.edu','GRATEFUL MINION')
-  s.web.send(message)
+  message.set_subject(subj)
+  message.set_text(text_content)
+  s.send(message)
   return redirect('index')
 
