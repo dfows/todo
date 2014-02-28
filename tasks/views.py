@@ -23,7 +23,7 @@ def index(request):
 def alter(request,task_id):
   finished_task = Task.objects.get(id=task_id)
   pts = finished_task.point_worth
-  s = sendgrid.Sendgrid('app@heroku.com','password',secure=True)
+  s = sendgrid.Sendgrid('app22616172@heroku.com','4suhwxvr',secure=True)
   subj = 'Task #'+task_id+' changed!'
   text_content = ''
   if finished_task.completed:
@@ -33,7 +33,7 @@ def alter(request,task_id):
     finished_task.completed = True
     text_content = "Congrats! You've completed a task and earned "+pts+" points!"
   finished_task.save()
-  message = sendgrid.Message(('app@heroku.com','DEMONSLAYER'),subj,text_content)
+  message = sendgrid.Message(('app22616172@heroku.com','DEMONSLAYER'),subj,text_content)
   message.add_to('jk3405@nyu.edu','GRATEFUL MINION')
   s.web.send(message)
   return redirect('index')
