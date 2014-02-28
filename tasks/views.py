@@ -7,7 +7,8 @@ s = sendgrid.SendGridClient('app22616172@heroku.com','4suhwxvr')
 message = sendgrid.Mail()
 message.set_from('DEMONSLAYER <app22616172@heroku.com>')
 message.add_to('MINION <jk3405@nyu.edu>')
-subj,text_content = ''
+subj = ''
+text_content = ''
 
 # Create your views here.
 def index(request):
