@@ -34,7 +34,7 @@ def index(request):
 
 def alter(request,task_id):
   finished_task = Task.objects.get(id=task_id)
-  pts = finished_task.point_worth
+  pts = str(finished_task.point_worth)
   subj = 'Task #'+task_id+' changed!'
   if finished_task.completed:
     finished_task.completed = False
