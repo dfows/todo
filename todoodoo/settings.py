@@ -64,6 +64,7 @@ EMAIL_USE_TLS = True
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
+"""
 # Parse db config from DATABASE_URL
 import dj_database_url
 
@@ -83,7 +84,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-"""
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

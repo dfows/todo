@@ -29,6 +29,16 @@
   </li>
 {% endfor %}
 </ul>
+{% if user == '' %}
+<form action="{% url 'login' %}" method="POST">{% csrf_token %}
+<span>
+  Name: <input type="text" name="login_name"/>
+  <input type="submit" value="Login"/>
+</span>
+</form>
+{% else %}
+user: {{ user }}
+{% endif %}
 </div>
 </body>
 </html>
