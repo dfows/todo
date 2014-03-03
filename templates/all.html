@@ -7,7 +7,7 @@
 <body>
 <div id="content">
 {{ msg }}
-<ul>
+<ul id="taskList">
 <li>
 <form action="{% url 'index' %}" method="POST">{% csrf_token %}
 <span>
